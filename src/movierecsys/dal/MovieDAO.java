@@ -97,7 +97,6 @@ public class MovieDAO
         try (BufferedWriter bw = Files.newBufferedWriter(path, StandardOpenOption.SYNC, StandardOpenOption.APPEND, StandardOpenOption.WRITE))
         {
             id = getNextAvailableMovieID();
-            bw.newLine();
             bw.write(id + "," + releaseYear + "," + title);
         }
         return new Movie(id, releaseYear, title);
