@@ -12,6 +12,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.RandomAccessFile;
 import java.nio.charset.Charset;
 import java.nio.charset.MalformedInputException;
 import java.nio.file.Files;
@@ -124,32 +126,28 @@ public class MovieDAO
      */
     public void deleteMovie(Movie movie) throws FileNotFoundException, IOException
     {
-       String source = "data/movie_titles.txt";
-        File file = new File(source);
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) //Using a try with resources!
+  
+        PrintWriter writer = new PrintWriter("data/backupmovies.txt", "UTF-8");
+        List<Movie> allMovies = getAllMovies();
+        File movielist = new File ("data/movie_list.txt");
+   
+        
+        for (Movie x : allMovies)
         {
-            String line;
-            while ((line = reader.readLine()) != null)
-            {
-                if (line.equals(movie.getId()+","+movie.getYear()+","+movie.getTitle()))
-                {
-                    try
-                    {
-                      FileWriter fw = new FileWriter(file);
-                      BufferedWriter writer = new BufferedWriter(fw);
-                      
-                      writer.newLine();
-                      writer.write("Test");
-                      
-                      
-                    } catch (Exception ex)
-                    {
-                        //Do nothing. Optimally we would log the error.
-                    }
-                }
+            if (x.getId()!=movie.getId()){
+            
+            writer.write(x.getId()+","+x.getYear()+","+x.getTitle()+"\n");
             }
+            
         }
+        
+        movielist.delete();
+//        File nyliste = new File("data/backupmovies.txt");
+//        File nyliste2 = new File("movies.txt");
+//        nyliste.renameTo(nyliste2);
+        writer.close();
+
+        
             
     }
 
