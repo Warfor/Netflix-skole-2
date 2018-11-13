@@ -142,10 +142,26 @@ public class MovieDAO
      * @param id ID of the movie.
      * @return A Movie object.
      */
-    private Movie getMovie(int id)
+    public Movie getMovie(int id) throws IOException
     {
-        //TODO Get one Movie
-        return null;
+     List<Movie> allMovies = getAllMovies();
+        System.out.println("Tester");
+   
+    
+     
+     for (Movie x: allMovies)
+     {
+         if (x.getId()==id)
+         {
+             System.out.println(""+x.getTitle());
+             return x;
+             
+         }
+     }
+     
+     return null;
+     
+     
     }
 
 }
