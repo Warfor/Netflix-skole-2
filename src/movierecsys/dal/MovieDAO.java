@@ -129,7 +129,7 @@ public class MovieDAO
   
         PrintWriter writer = new PrintWriter("data/backupmovies.txt", "UTF-8");
         List<Movie> allMovies = getAllMovies();
-        File movielist = new File ("data/movie_list.txt");
+        File movielist = new File ("data/movie_titles.txt");
    
         
         for (Movie x : allMovies)
@@ -140,15 +140,12 @@ public class MovieDAO
             }
             
         }
-        
+    
         movielist.delete();
-//        File nyliste = new File("data/backupmovies.txt");
-//        File nyliste2 = new File("movies.txt");
-//        nyliste.renameTo(nyliste2);
         writer.close();
-
-        
-            
+        File backuplist = new File ("data/backupmovies.txt");
+        backuplist.renameTo(movielist);
+      
     }
 
     /**
