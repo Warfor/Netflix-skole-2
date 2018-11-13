@@ -24,8 +24,11 @@ public class FileReaderTester
      */
     public static void main(String[] args) throws IOException
     {
-         MovieDAO movieDao = new MovieDAO();
-         movieDao.getMovie(1014);
+       Movie screamers = new Movie (16,1996,"Screamers");
+       MovieDAO movieDao = new MovieDAO();
+       movieDao.getMovie(1014);
+       movieDao.deleteMovie(screamers);
+        
         
         
     }

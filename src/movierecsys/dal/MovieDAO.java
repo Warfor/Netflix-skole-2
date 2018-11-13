@@ -8,7 +8,9 @@ package movierecsys.dal;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.charset.MalformedInputException;
@@ -120,9 +122,35 @@ public class MovieDAO
      *
      * @param movie The movie to delete.
      */
-    private void deleteMovie(Movie movie)
+    public void deleteMovie(Movie movie) throws FileNotFoundException, IOException
     {
-        //TODO Delete movie
+       String source = "data/movie_titles.txt";
+        File file = new File(source);
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) //Using a try with resources!
+        {
+            String line;
+            while ((line = reader.readLine()) != null)
+            {
+                if (line.equals(movie.getId()+","+movie.getYear()+","+movie.getTitle()))
+                {
+                    try
+                    {
+                      FileWriter fw = new FileWriter(file);
+                      BufferedWriter writer = new BufferedWriter(fw);
+                      
+                      writer.newLine();
+                      writer.write("Test");
+                      
+                      
+                    } catch (Exception ex)
+                    {
+                        //Do nothing. Optimally we would log the error.
+                    }
+                }
+            }
+        }
+            
     }
 
     /**
