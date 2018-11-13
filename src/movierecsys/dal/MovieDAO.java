@@ -145,23 +145,15 @@ public class MovieDAO
     public Movie getMovie(int id) throws IOException
     {
      List<Movie> allMovies = getAllMovies();
-        System.out.println("Tester");
-   
-    
-     
      for (Movie x: allMovies)
      {
          if (x.getId()==id)
          {
              System.out.println(""+x.getTitle());
              return x;
-             
          }
      }
-     
      return null;
-     
-     
     }
 
 }
