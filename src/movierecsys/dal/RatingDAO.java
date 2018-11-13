@@ -5,7 +5,14 @@
  */
 package movierecsys.dal;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import movierecsys.be.Movie;
 import movierecsys.be.Rating;
 import movierecsys.be.User;
 
@@ -15,7 +22,7 @@ import movierecsys.be.User;
  */
 public class RatingDAO
 {
-    
+    private static final String RATINGS_SOURCE = "data/ratings.txt";
     /**
      * Persists the given rating.
      * @param rating the rating to persist.
@@ -47,10 +54,31 @@ public class RatingDAO
      * Gets all ratings from all users.
      * @return List of all ratings.
      */
-    public List<Rating> getAllRatings()
+    public List<Rating> getAllRatings() throws FileNotFoundException, IOException
     {
-        //TODO Get all rating.
-        return null;
+    List<Rating> allRatings = new ArrayList<>();
+        String source = "data/ratings.txt";
+        File file = new File(source);
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) //Using a try with resources!
+        {
+            String line;
+            while ((line = reader.readLine()) != null)
+            {
+                if (!line.isEmpty())
+                {
+                    try
+                    {
+                        Rating rat = stringArrayToRating(line);
+                        allRatings.add(rat);
+                    } catch (Exception ex)
+                    {
+                        //Do nothing. Optimally we would log the error.
+                    }
+                }
+            }
+        }
+        return allRatings;
     }
     
     /**
@@ -62,6 +90,22 @@ public class RatingDAO
     {
         //TODO Get user ratings.
         return null;
+    }
+    
+    private Rating stringArrayToRating(String line) throws IOException
+    {
+        String[] arrRating = line.split(",");
+        
+        MovieDAO movies = new MovieDAO();
+        UserDAO user = new UserDAO();
+        
+        Movie movie = movies.getMovie(Integer.parseInt(arrRating[0]));
+        User user1 = user.getUser(Integer.parseInt(arrRating[1]));
+        int rating = Integer.parseInt(arrRating[2]);
+        
+        Rating rat = new Rating(movie, user1, rating);
+        
+        return rat;
     }
     
 }

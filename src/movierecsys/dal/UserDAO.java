@@ -5,7 +5,15 @@
  */
 package movierecsys.dal;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import movierecsys.be.Movie;
+import movierecsys.be.Rating;
 import movierecsys.be.User;
 
 /**
@@ -19,10 +27,32 @@ public class UserDAO
      * Gets a list of all known users.
      * @return List of users.
      */
-    public List<User> getAllUsers()
+    public List<User> getAllUsers() throws FileNotFoundException, IOException
     {
-        //TODO Get all users
-        return null;
+        List<User> allUsers = new ArrayList<>();
+        String source = "data/users.txt";
+        File file = new File(source);
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) //Using a try with resources!
+        {
+            String line;
+            while ((line = reader.readLine()) != null)
+            {
+                if (!line.isEmpty())
+                {
+                    try
+                    {
+                        User user = stringArrayToUser(line);
+                        allUsers.add(user);
+                        
+                    } catch (Exception ex)
+                    {
+                        //Do nothing. Optimally we would log the error.
+                    }
+                }
+            }
+        }
+        return allUsers;
     }
     
     /**
@@ -30,11 +60,21 @@ public class UserDAO
      * @param id The ID of the user.
      * @return The User with the ID.
      */
-    public User getUser(int id)
+    public User getUser(int id) throws IOException
     {
-        //TODO Get User
-        return null;
+    
+     List<User> allUsers = getAllUsers();
+     for (User x: allUsers)
+     {
+         if (x.getId()==id)
+         {
+             
+             return x;
+         }
+     }
+     return null;
     }
+    
     
     /**
      * Updates a user so the persistence storage reflects the given User object.
@@ -43,6 +83,20 @@ public class UserDAO
     public void updateUser(User user)
     {
         //TODO Update user.
+    }
+
+
+
+   private User stringArrayToUser(String line) throws IOException
+    {
+        String[] arrUser = line.split(",");
+     
+        int id = Integer.parseInt(arrUser[0]);
+        String name = arrUser[1];
+
+        User user1 = new User(id, name);
+        
+        return user1;
     }
     
 }

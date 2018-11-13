@@ -8,6 +8,7 @@ package movierecsys.dal;
 import java.io.IOException;
 import java.util.List;
 import movierecsys.be.Movie;
+import movierecsys.be.User;
 
 /**
  *
@@ -26,8 +27,13 @@ public class FileReaderTester
     {
        Movie screamers = new Movie (16,2001,"Screamers");
        MovieDAO movieDao = new MovieDAO();
-       movieDao.updateMovie(screamers);
+       UserDAO user = new UserDAO();
+//       movieDao.updateMovie(screamers);
+       user.getAllUsers();
+       User test = user.getUser(79);
+        System.out.println(""+test.getName());
       
+        
         
         
         
