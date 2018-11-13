@@ -14,7 +14,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.RandomAccessFile;
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.nio.charset.MalformedInputException;
 import java.nio.file.Files;
@@ -155,29 +154,9 @@ public class MovieDAO
      *
      * @param movie The updated movie.
      */
-    public void updateMovie(Movie movie) throws FileNotFoundException, UnsupportedEncodingException, IOException
+    private void updateMovie(Movie movie)
     {
-        PrintWriter writer = new PrintWriter("data/backupmovies.txt", "UTF-8");
-        List<Movie> allMovies = getAllMovies();
-        File movielist = new File ("data/movie_titles.txt");
-   
-        
-        for (Movie x : allMovies)
-        {
-            if (x.getId()!=movie.getId()){
-            
-            writer.write(x.getId()+","+x.getYear()+","+x.getTitle()+"\n");
-            }
-            else {
-            writer.write(x.getId()+","+movie.getYear()+","+movie.getTitle()+"\n");
-            }
-            
-        }
-    
-        movielist.delete();
-        writer.close();
-        File backuplist = new File ("data/backupmovies.txt");
-        backuplist.renameTo(movielist);
+        //TODO Update movies
     }
 
     /**
