@@ -6,9 +6,13 @@
 package movierecsys.gui.controller;
 
 import java.net.URL;
+import static java.nio.file.Files.list;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import movierecsys.be.Movie;
@@ -35,6 +39,8 @@ public class MovieRecController implements Initializable
     private ListView<Movie> lstMovies;
 
     private MovieModel movieModel;
+    @FXML
+    private Button søgbtn;
 
     public MovieRecController()
     {
@@ -63,6 +69,13 @@ public class MovieRecController implements Initializable
         //TODO Display error properly
         System.out.println(ex.getMessage());
         ex.printStackTrace();
+    }
+
+    @FXML
+    private void FindMovie(ActionEvent event)
+         
+    {
+            
     }
 
 }
