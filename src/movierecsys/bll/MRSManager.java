@@ -7,7 +7,10 @@
 package movierecsys.bll;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import movierecsys.be.Movie;
 import movierecsys.be.Rating;
 import movierecsys.be.User;
@@ -48,7 +51,23 @@ public class MRSManager implements MRSLogicFacade {
     @Override
     public List<Movie> searchMovies(String query)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    ArrayList<Movie> searchMovies = new ArrayList<Movie>();
+    List<Movie> allMovies= new ArrayList<Movie>();
+        try
+        {
+            allMovies = movieDAO.getAllMovies();
+        } catch (IOException ex)
+        {
+            Logger.getLogger(MRSManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        for(Movie x : allMovies){
+            if (x.getTitle().contains(query)){
+                searchMovies.add(x);
+            }
+                
+        }
+    return searchMovies;
     }
 
     @Override
