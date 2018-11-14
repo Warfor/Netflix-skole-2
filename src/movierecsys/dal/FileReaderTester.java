@@ -8,6 +8,7 @@ package movierecsys.dal;
 import java.io.IOException;
 import java.util.List;
 import movierecsys.be.Movie;
+import movierecsys.be.Rating;
 import movierecsys.be.User;
 
 /**
@@ -32,11 +33,13 @@ public class FileReaderTester
 ////       movieDao.updateMovie(screamers);
 //       user.getAllUsers();
 //       User test = user.getUser(2503676);
-  
+        rating.getAllRatings();
+        User user1 = new User(2502098, "Vesna Mellouli");
+        rating.getRatings(user1);
        
        
 
-       
+//       2502098,Vesna Mellouli
         
         
         

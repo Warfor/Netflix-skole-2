@@ -215,12 +215,12 @@ public class RatingDAO
     {
 
        List<Rating> allRatings = getAllRatings();
-       List<Rating> ratingsByUser = null;
+       ArrayList<Rating> ratingsByUser= new ArrayList<Rating>();
        
        for (Rating x : allRatings){
-           if(x.getUser()==user.getId()){
+            if(x.getUser()==user.getId()){
                ratingsByUser.add(x);
-           }
+               }
                
        }
        return ratingsByUser;
