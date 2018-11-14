@@ -87,9 +87,7 @@ public class MovieModel
 
     }
     
-    public ObservableList<Movie> searchedMovies(){
-        
-    }
+
 
     
 

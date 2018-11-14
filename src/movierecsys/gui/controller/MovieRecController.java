@@ -9,6 +9,7 @@ import java.net.URL;
 import static java.nio.file.Files.list;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -76,7 +77,10 @@ public class MovieRecController implements Initializable
     {
       String input = txtMovieSearch.getText();
       MRSManager manager = new MRSManager();
-      lstMovies.setItems();
+      ObservableList<Movie> movieList = FXCollections.observableArrayList(manager.searchMovies(input));
+      lstMovies.setItems(movieList);
+      
+      
       
       
       
