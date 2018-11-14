@@ -193,7 +193,7 @@ public class MovieDAO
      {
          if (x.getId()==id)
          {
-             System.out.println(""+x.getTitle());
+             
              return x;
          }
      }

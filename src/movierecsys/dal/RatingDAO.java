@@ -71,6 +71,7 @@ public class RatingDAO
                     {
                         Rating rat = stringArrayToRating(line);
                         allRatings.add(rat);
+                        
                     } catch (Exception ex)
                     {
                         //Do nothing. Optimally we would log the error.

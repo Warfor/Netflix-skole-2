@@ -25,14 +25,16 @@ public class FileReaderTester
      */
     public static void main(String[] args) throws IOException
     {
-       Movie screamers = new Movie (16,2001,"Screamers");
-       MovieDAO movieDao = new MovieDAO();
-       UserDAO user = new UserDAO();
-//       movieDao.updateMovie(screamers);
-       user.getAllUsers();
-       User test = user.getUser(79);
-        System.out.println(""+test.getName());
-      
+//       Movie screamers = new Movie (16,2001,"Screamers");
+//       MovieDAO movieDao = new MovieDAO();
+       RatingDAO rating = new RatingDAO();
+//       UserDAO user = new UserDAO();
+////       movieDao.updateMovie(screamers);
+//       user.getAllUsers();
+//       User test = user.getUser(2503676);
+       rating.getAllRatings();
+       
+       
         
         
         
