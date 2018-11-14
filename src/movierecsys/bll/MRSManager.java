@@ -51,8 +51,8 @@ public class MRSManager implements MRSLogicFacade {
     @Override
     public List<Movie> searchMovies(String query)
     {
-    ArrayList<Movie> searchMovies = new ArrayList<Movie>();
-    List<Movie> allMovies= new ArrayList<Movie>();
+    ArrayList<Movie> searchMovies = new ArrayList<>();
+    List<Movie> allMovies= new ArrayList<>();
         try
         {
             allMovies = movieDAO.getAllMovies();
@@ -63,7 +63,7 @@ public class MRSManager implements MRSLogicFacade {
         
         for(Movie x : allMovies){
          
-            if (x.getTitle().contains(query)){
+            if (x.getTitle().toLowerCase().contains(query.toLowerCase())){
                 searchMovies.add(x);
                 
             }
@@ -76,7 +76,8 @@ public class MRSManager implements MRSLogicFacade {
     @Override
     public Movie createMovie(int year, String title)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+return null; 
+     
     }
 
     @Override

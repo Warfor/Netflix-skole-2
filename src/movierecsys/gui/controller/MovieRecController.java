@@ -5,6 +5,8 @@
  */
 package movierecsys.gui.controller;
 
+import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
+import java.io.IOException;
 import java.net.URL;
 import static java.nio.file.Files.list;
 import java.util.ArrayList;
@@ -20,6 +22,7 @@ import javafx.scene.control.TextField;
 import movierecsys.be.Movie;
 import movierecsys.bll.MRSManager;
 import movierecsys.bll.exception.MovieRecSysException;
+import movierecsys.dal.MovieDAO;
 import movierecsys.gui.model.MovieModel;
 
 /**
@@ -41,6 +44,12 @@ public class MovieRecController implements Initializable
     private Button søgbtn;
     @FXML
     private TextField txtMovieSearch;
+    @FXML
+    private Button addMovie;
+    @FXML
+    private TextField name;
+    @FXML
+    private TextField year;
 
     public MovieRecController()
     {
@@ -84,6 +93,22 @@ public class MovieRecController implements Initializable
       
       
       
+    }
+
+    @FXML
+    private void addMovie(ActionEvent event) throws IOException
+    {
+    String navn = name.getText();
+    String aar = year.getText();
+    int aartal = Integer.parseInt(aar);
+    
+    MovieDAO movie = new MovieDAO();
+    movie.createMovie(aartal, navn);
+    
+    name.clear();
+    year.clear();
+    
+//    
     }
 
 }
