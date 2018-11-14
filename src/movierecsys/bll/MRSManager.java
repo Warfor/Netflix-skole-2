@@ -62,11 +62,14 @@ public class MRSManager implements MRSLogicFacade {
         }
         
         for(Movie x : allMovies){
+         
             if (x.getTitle().contains(query)){
                 searchMovies.add(x);
+                
             }
                 
         }
+  
     return searchMovies;
     }
 

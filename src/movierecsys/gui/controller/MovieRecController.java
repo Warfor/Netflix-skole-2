@@ -9,6 +9,7 @@ import java.net.URL;
 import static java.nio.file.Files.list;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,6 +17,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import movierecsys.be.Movie;
+import movierecsys.bll.MRSManager;
 import movierecsys.bll.exception.MovieRecSysException;
 import movierecsys.gui.model.MovieModel;
 
@@ -26,11 +28,6 @@ import movierecsys.gui.model.MovieModel;
 public class MovieRecController implements Initializable
 {
 
-    /**
-     * The TextField containing the URL of the targeted website.
-     */
-    @FXML
-    private TextField txtMovieSearcjh;
 
     /**
      * The TextField containing the query word.
@@ -41,6 +38,8 @@ public class MovieRecController implements Initializable
     private MovieModel movieModel;
     @FXML
     private Button søgbtn;
+    @FXML
+    private TextField txtMovieSearch;
 
     public MovieRecController()
     {
@@ -75,7 +74,12 @@ public class MovieRecController implements Initializable
     private void FindMovie(ActionEvent event)
          
     {
-            
+      String input = txtMovieSearch.getText();
+      MRSManager manager = new MRSManager();
+      lstMovies.setItems();
+      
+      
+      
     }
 
 }

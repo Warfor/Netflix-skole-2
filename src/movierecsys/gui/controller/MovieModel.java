@@ -26,6 +26,7 @@ public class MovieModel
 
 
 
+
     private MRSLogicFacade logiclayer;
 
 
@@ -39,6 +40,8 @@ public class MovieModel
         logiclayer = new MRSManager();
 
         movies.addAll(logiclayer.getAllMovies());
+
+        
 
     }
 
@@ -82,6 +85,10 @@ public class MovieModel
 
         movies.remove(movie);
 
+    }
+    
+    public ObservableList<Movie> searchedMovies(){
+        
     }
 
     
