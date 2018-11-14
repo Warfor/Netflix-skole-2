@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import movierecsys.be.Movie;
@@ -81,9 +82,29 @@ public class UserDAO
      * Updates a user so the persistence storage reflects the given User object.
      * @param user The updated user.
      */
-    public void updateUser(User user)
+    public void updateUser(User user) throws FileNotFoundException, IOException
     {
-        //TODO Update user.
+          PrintWriter writer = new PrintWriter("data/backupusers.txt", "UTF-8");
+        List<User> allUsers = getAllUsers();
+        File userlist = new File ("data/users.txt");
+   
+        
+        for (User x : allUsers)
+        {
+            if (x.getId()!=user.getId()){
+            
+            writer.write(x.getId()+","+x.getName()+"\n");
+            }
+            else {
+            writer.write(x.getId()+","+user.getName()+"\n");
+            }
+            
+        }
+    
+        userlist.delete();
+        writer.close();
+        File backuplist = new File ("data/backupusers.txt");
+        backuplist.renameTo(userlist);
     }
 
 
