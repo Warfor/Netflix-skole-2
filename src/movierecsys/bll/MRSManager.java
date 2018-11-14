@@ -76,7 +76,15 @@ public class MRSManager implements MRSLogicFacade {
     @Override
     public Movie createMovie(int year, String title)
     {
-return null; 
+    Movie newMovie = null;
+        try
+        {
+            newMovie = movieDAO.createMovie(year, title);
+        } catch (IOException ex)
+        {
+            Logger.getLogger(MRSManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return newMovie;
      
     }
 

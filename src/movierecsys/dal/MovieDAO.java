@@ -58,6 +58,7 @@ public class MovieDAO
                     {
                         Movie mov = stringArrayToMovie(line);
                         allMovies.add(mov);
+                        
                     } catch (Exception ex)
                     {
                         //Do nothing. Optimally we would log the error.
@@ -65,6 +66,7 @@ public class MovieDAO
                 }
             }
         }
+        
         return allMovies;
     }
 
@@ -102,7 +104,7 @@ public class MovieDAO
         try (BufferedWriter bw = Files.newBufferedWriter(path, StandardOpenOption.SYNC, StandardOpenOption.APPEND, StandardOpenOption.WRITE))
         {
             id = getNextAvailableMovieID();
-            bw.write(id + "," + releaseYear + "," + title+"\n");
+            bw.write("\n"+id + "," + releaseYear + "," + title);
         }
         return new Movie(id, releaseYear, title);
     }

@@ -50,6 +50,8 @@ public class MovieRecController implements Initializable
     private TextField name;
     @FXML
     private TextField year;
+    
+    MRSManager manager = new MRSManager();
 
     public MovieRecController()
     {
@@ -85,7 +87,7 @@ public class MovieRecController implements Initializable
          
     {
       String input = txtMovieSearch.getText();
-      MRSManager manager = new MRSManager();
+      
       ObservableList<Movie> movieList = FXCollections.observableArrayList(manager.searchMovies(input));
       lstMovies.setItems(movieList);
       
@@ -102,13 +104,14 @@ public class MovieRecController implements Initializable
     String aar = year.getText();
     int aartal = Integer.parseInt(aar);
     
-    MovieDAO movie = new MovieDAO();
-    movie.createMovie(aartal, navn);
+    movieModel.createMovie(aartal, navn);
     
     name.clear();
     year.clear();
     
 //    
     }
+
+
 
 }
