@@ -166,6 +166,7 @@ public class RatingDAO
     {
 
         List<Rating> allRatings = new ArrayList<>();
+        
 
         byte[] all = Files.readAllBytes(new File(RATING_SOURCE).toPath()); //I get all records as binary data!
 
