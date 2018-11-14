@@ -210,13 +210,20 @@ public class RatingDAO
      * @return The list of ratings.
      *
      */
-    public List<Rating> getRatings(User user)
+    public List<Rating> getRatings(User user) throws IOException
 
     {
 
-        //TODO Get user ratings.
-        return null;
-
+       List<Rating> allRatings = getAllRatings();
+       List<Rating> ratingsByUser = null;
+       
+       for (Rating x : allRatings){
+           if(x.getUser()==user.getId()){
+               ratingsByUser.add(x);
+           }
+               
+       }
+       return ratingsByUser;
     }
 
     private Rating getRatingFromLine(String line) throws NumberFormatException

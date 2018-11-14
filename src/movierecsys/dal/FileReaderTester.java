@@ -32,7 +32,9 @@ public class FileReaderTester
 ////       movieDao.updateMovie(screamers);
 //       user.getAllUsers();
 //       User test = user.getUser(2503676);
-       rating.getAllRatings();
+  
+       
+       
 
        
         
