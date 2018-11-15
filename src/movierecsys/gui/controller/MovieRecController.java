@@ -5,7 +5,7 @@
  */
 package movierecsys.gui.controller;
 
-import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
+
 import java.io.IOException;
 import java.net.URL;
 import static java.nio.file.Files.list;
@@ -17,6 +17,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import movierecsys.be.Movie;
@@ -52,6 +53,12 @@ public class MovieRecController implements Initializable
     private TextField year;
     
     MRSManager manager = new MRSManager();
+    @FXML
+    private ComboBox<String> comboBox;
+    
+    
+    ObservableList<String> list = FXCollections.observableArrayList();
+
 
     public MovieRecController()
     {
@@ -69,6 +76,11 @@ public class MovieRecController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
         lstMovies.setItems(movieModel.getMovies());
+    comboBox.setItems(FXCollections.observableArrayList("Tilføj film","Fjern film"));
+ 
+    comboBox.setVisibleRowCount(2);
+       
+
     }
 
     /**
