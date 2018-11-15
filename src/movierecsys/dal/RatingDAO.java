@@ -5,6 +5,7 @@
  */
 package movierecsys.dal;
 
+import static com.oracle.jrockit.jfr.ContentType.Bytes;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -43,11 +44,23 @@ public class RatingDAO
      * @param rating the rating to persist.
      *
      */
-    public void createRating(Rating rating)
+    public void createRating(Rating rating) throws FileNotFoundException, IOException
 
     {
 
-        //TODO Rate movie
+        int movie = rating.getMovie();
+        int user = rating.getUser();
+        int score = rating.getRating();
+        
+        
+        RandomAccessFile raf = new RandomAccessFile("data/user_ratings", "rw");
+        raf.seek(raf.length());
+        raf.writeInt(movie);
+        raf.writeInt(user);
+        raf.writeInt(score);
+        
+        raf.close();
+        
     }
 
     /**
@@ -151,7 +164,8 @@ public class RatingDAO
     {
        List<Rating> allRatings = getAllRatings();
         
-        PrintWriter writer = new PrintWriter("data/backupratings.txt", "UTF-8");
+        File binratings = new File("data/binratings");
+        RandomAccessFile raf = new RandomAccessFile("data/binratings", "rw");
 //        File movielist = new File ("data/movie_titles.txt");
    
         
@@ -163,15 +177,17 @@ public class RatingDAO
             // Do nothing
             }
             else {
-            Integer mov = x.getMovie();
+            int mov = x.getMovie();
            
-            Integer id = x.getUser();
+            int id = x.getUser();
             
-            Integer rat = x.getRating();
+            int rat = x.getRating();
             
                         
             String rating = ""+mov+","+id+","+rat+"\n";
-            writer.write(rating);
+            raf.writeInt(mov);
+            raf.writeInt(id);
+            raf.writeInt(rat);
             }
             
         
@@ -179,9 +195,14 @@ public class RatingDAO
         }
     
 //        movielist.delete();
-        writer.close();
+        raf.close();
+        File originalListe = new File("data/user_ratings");
+        originalListe.delete();
+        
+        binratings.renameTo(originalListe);
 //        File backuplist = new File ("data/backupmovies.txt");
 //        backuplist.renameTo(movielist);
+
         }
         
  
@@ -220,6 +241,8 @@ public class RatingDAO
             int rating = ByteBuffer.wrap(all, i + Integer.BYTES * 2, Integer.BYTES).order(ByteOrder.BIG_ENDIAN).getInt();
 
             Rating r = new Rating(movieId, userId, rating);
+            
+          
 
             allRatings.add(r);
 
@@ -282,9 +305,6 @@ public class RatingDAO
 
     }
     
-    private void txtToBin(){
-        RandomAccessFile raf = new RandomAccessFile("data/binratings", "rw");
-        
-    }
+  
 
 }

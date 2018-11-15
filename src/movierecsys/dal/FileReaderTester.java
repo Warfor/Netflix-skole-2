@@ -26,36 +26,8 @@ public class FileReaderTester
      */
     public static void main(String[] args) throws IOException
     {
-//       Movie screamers = new Movie (16,2001,"Screamers");
-//       MovieDAO movieDao = new MovieDAO();
-       RatingDAO rating = new RatingDAO();
-//       UserDAO user = new UserDAO();
-////       movieDao.updateMovie(screamers);
-//       user.getAllUsers();
-//       User test = user.getUser(2503676);
-        List<Rating> allRatings = rating.getAllRatings();
-        System.out.println(""+allRatings.size());
-//        User user1 = new User(2502098, "Vesna Mellouli");
+  
 
-
-
-        Rating rating1 = new Rating(8,1333,1);
-        rating.deleteRating(rating1);
-        
-       
-        
-      
-//        rating.deleteRating(testrating);
-//        List<Rating> allRatings2 = rating.getAllRatings();
-//        System.out.println(""+allRatings2.size());
-      
-        
-       
-       
-
-//       2502098,Vesna Mellouli
-        
-        
         
         
     }
