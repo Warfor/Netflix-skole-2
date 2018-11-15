@@ -33,9 +33,23 @@ public class FileReaderTester
 ////       movieDao.updateMovie(screamers);
 //       user.getAllUsers();
 //       User test = user.getUser(2503676);
-        rating.getAllRatings();
-        User user1 = new User(2502098, "Vesna Mellouli");
-        rating.getRatings(user1);
+        List<Rating> allRatings = rating.getAllRatings();
+        System.out.println(""+allRatings.size());
+//        User user1 = new User(2502098, "Vesna Mellouli");
+
+
+
+        Rating rating1 = new Rating(8,1333,1);
+        rating.deleteRating(rating1);
+        
+       
+        
+      
+//        rating.deleteRating(testrating);
+//        List<Rating> allRatings2 = rating.getAllRatings();
+//        System.out.println(""+allRatings2.size());
+      
+        
        
        
 

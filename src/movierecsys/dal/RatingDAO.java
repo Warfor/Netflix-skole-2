@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -145,12 +146,47 @@ public class RatingDAO
      * @param rating
      *
      */
-    public void deleteRating(Rating rating)
+    public void deleteRating(Rating ratingToDelete) throws IOException
 
     {
+       List<Rating> allRatings = getAllRatings();
+        
+        PrintWriter writer = new PrintWriter("data/backupratings.txt", "UTF-8");
+//        File movielist = new File ("data/movie_titles.txt");
+   
+        
+        for (Rating x : allRatings)
+        {
+            if (x.getRating()==ratingToDelete.getRating() && x.getMovie()==ratingToDelete.getMovie() && x.getUser()==ratingToDelete.getUser())
+                
+            {
+            // Do nothing
+            }
+            else {
+            Integer mov = x.getMovie();
+           
+            Integer id = x.getUser();
+            
+            Integer rat = x.getRating();
+            
+                        
+            String rating = ""+mov+","+id+","+rat+"\n";
+            writer.write(rating);
+            }
+            
+        
+            
+        }
+    
+//        movielist.delete();
+        writer.close();
+//        File backuplist = new File ("data/backupmovies.txt");
+//        backuplist.renameTo(movielist);
+        }
+        
+ 
+    
 
-        //TODO Delete rating
-    }
 
     /**
      *
@@ -167,12 +203,15 @@ public class RatingDAO
 
         List<Rating> allRatings = new ArrayList<>();
         
+        
+        
 
         byte[] all = Files.readAllBytes(new File(RATING_SOURCE).toPath()); //I get all records as binary data!
 
         for (int i = 0; i < all.length; i += RECORD_SIZE)
 
         {
+            
 
             int movieId = ByteBuffer.wrap(all, i, Integer.BYTES).order(ByteOrder.BIG_ENDIAN).getInt();
 
@@ -241,6 +280,11 @@ public class RatingDAO
 
         return new Rating(movId, userId, rating);
 
+    }
+    
+    private void txtToBin(){
+        RandomAccessFile raf = new RandomAccessFile("data/binratings", "rw");
+        
     }
 
 }
