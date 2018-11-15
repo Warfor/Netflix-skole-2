@@ -53,11 +53,12 @@ public class MovieRecController implements Initializable
     private TextField year;
     
     MRSManager manager = new MRSManager();
-    @FXML
     private ComboBox<String> comboBox;
     
     
     ObservableList<String> list = FXCollections.observableArrayList();
+    @FXML
+    private Button remove;
 
 
     public MovieRecController()
@@ -76,9 +77,7 @@ public class MovieRecController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
         lstMovies.setItems(movieModel.getMovies());
-    comboBox.setItems(FXCollections.observableArrayList("Tilføj film","Fjern film"));
- 
-    comboBox.setVisibleRowCount(2);
+
        
 
     }
@@ -124,6 +123,17 @@ public class MovieRecController implements Initializable
 //    
     }
 
+    @FXML
+    private void removeButton(ActionEvent event)
+    {
+    Movie toDelete = lstMovies.getSelectionModel().getSelectedItem();
+    movieModel.deleteMovie(toDelete);
+    
+    }
+
+
+    
+    
 
 
 }

@@ -97,7 +97,14 @@ public class MRSManager implements MRSLogicFacade {
     @Override
     public void deleteMovie(Movie movie)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try
+        {
+            movieDAO.deleteMovie(movie);
+        } catch (IOException ex)
+        {
+            Logger.getLogger(MRSManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
     @Override
