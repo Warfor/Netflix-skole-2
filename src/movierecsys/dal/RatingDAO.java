@@ -27,7 +27,7 @@ import movierecsys.be.User;
  *
  * @author pgn
  */
-public class RatingDAO
+public class RatingDAO implements IRatingRepository
 
 {
 
@@ -44,6 +44,7 @@ public class RatingDAO
      * @param rating the rating to persist.
      *
      */
+    @Override
     public void createRating(Rating rating) throws FileNotFoundException, IOException
 
     {
@@ -76,6 +77,7 @@ public class RatingDAO
      * @throws java.io.IOException
      *
      */
+    @Override
     public void updateRating(Rating rating) throws IOException
 
     {
@@ -159,6 +161,7 @@ public class RatingDAO
      * @param rating
      *
      */
+    @Override
     public void deleteRating(Rating ratingToDelete) throws IOException
 
     {
@@ -189,17 +192,14 @@ public class RatingDAO
             raf.writeInt(id);
             raf.writeInt(rat);
             }
-            
-        
-            
         }
     
 //        movielist.delete();
-        raf.close();
-        File originalListe = new File("data/user_ratings");
-        originalListe.delete();
+            raf.close();
+            File originalListe = new File("data/user_ratings");
+            originalListe.delete();
         
-        binratings.renameTo(originalListe);
+            binratings.renameTo(originalListe);
 //        File backuplist = new File ("data/backupmovies.txt");
 //        backuplist.renameTo(movielist);
 
@@ -218,22 +218,17 @@ public class RatingDAO
      * @return List of all ratings.
      *
      */
+    @Override
     public List<Rating> getAllRatings() throws IOException
 
     {
-
         List<Rating> allRatings = new ArrayList<>();
-        
-        
-        
 
         byte[] all = Files.readAllBytes(new File(RATING_SOURCE).toPath()); //I get all records as binary data!
 
         for (int i = 0; i < all.length; i += RECORD_SIZE)
 
         {
-            
-
             int movieId = ByteBuffer.wrap(all, i, Integer.BYTES).order(ByteOrder.BIG_ENDIAN).getInt();
 
             int userId = ByteBuffer.wrap(all, i + Integer.BYTES, Integer.BYTES).order(ByteOrder.BIG_ENDIAN).getInt();
@@ -242,8 +237,6 @@ public class RatingDAO
 
             Rating r = new Rating(movieId, userId, rating);
             
-          
-
             allRatings.add(r);
 
         }
@@ -259,7 +252,6 @@ public class RatingDAO
         });
 
         return allRatings;
-
     }
 
     /**
@@ -273,6 +265,7 @@ public class RatingDAO
      * @return The list of ratings.
      *
      */
+    @Override
     public List<Rating> getRatings(User user) throws IOException
 
     {

@@ -23,6 +23,11 @@ public class Movie
         this.year = year;
     }
 
+    public Movie(int movieId, int userId, Rating rating)
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public int getId()
     {
         return id;
