@@ -117,6 +117,8 @@ public class MovieDAO implements IMovieRepository
      * @return
      * @throws IOException
      */
+
+
     public int getNextAvailableMovieID() throws IOException
     {
         List<Movie> allMovies = getAllMovies();
@@ -128,6 +130,7 @@ public class MovieDAO implements IMovieRepository
      * Deletes a movie from the persistence storage.
      *
      * @param movie The movie to delete.
+     * @throws java.io.FileNotFoundException
      */
     @Override
     public void deleteMovie(Movie movie) throws FileNotFoundException, IOException
@@ -159,6 +162,8 @@ public class MovieDAO implements IMovieRepository
      * given Movie object.
      *
      * @param movie The updated movie.
+     * @throws java.io.FileNotFoundException
+     * @throws java.io.UnsupportedEncodingException
      */
     @Override
     public void updateMovie(Movie movie) throws FileNotFoundException, UnsupportedEncodingException, IOException
@@ -191,6 +196,7 @@ public class MovieDAO implements IMovieRepository
      *
      * @param id ID of the movie.
      * @return A Movie object.
+     * @throws java.io.IOException
      */
     @Override
     public Movie getMovie(int id) throws IOException
