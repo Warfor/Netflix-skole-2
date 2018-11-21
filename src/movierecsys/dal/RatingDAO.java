@@ -27,7 +27,7 @@ import movierecsys.be.User;
  *
  * @author pgn
  */
-public class RatingDAO
+public class RatingDAO implements IRatingRepository
 
 {
 
@@ -44,6 +44,7 @@ public class RatingDAO
      * @param rating the rating to persist.
      *
      */
+    @Override
     public void createRating(Rating rating) throws FileNotFoundException, IOException
 
     {
@@ -76,6 +77,7 @@ public class RatingDAO
      * @throws java.io.IOException
      *
      */
+    @Override
     public void updateRating(Rating rating) throws IOException
 
     {
@@ -159,6 +161,7 @@ public class RatingDAO
      * @param rating
      *
      */
+    @Override
     public void deleteRating(Rating ratingToDelete) throws IOException
 
     {
@@ -218,6 +221,7 @@ public class RatingDAO
      * @return List of all ratings.
      *
      */
+    @Override
     public List<Rating> getAllRatings() throws IOException
 
     {
@@ -273,6 +277,7 @@ public class RatingDAO
      * @return The list of ratings.
      *
      */
+    @Override
     public List<Rating> getRatings(User user) throws IOException
 
     {

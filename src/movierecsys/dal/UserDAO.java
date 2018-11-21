@@ -22,13 +22,14 @@ import movierecsys.be.User;
  *
  * @author pgn
  */
-public class UserDAO
+public class UserDAO implements IUserRepository
 {
     
     /**
      * Gets a list of all known users.
      * @return List of users.
      */
+    @Override
     public List<User> getAllUsers() throws FileNotFoundException, IOException
     {
         List<User> allUsers = new ArrayList<>();
@@ -62,6 +63,7 @@ public class UserDAO
      * @param id The ID of the user.
      * @return The User with the ID.
      */
+    @Override
     public User getUser(int id) throws IOException
     {
     
@@ -82,6 +84,7 @@ public class UserDAO
      * Updates a user so the persistence storage reflects the given User object.
      * @param user The updated user.
      */
+    @Override
     public void updateUser(User user) throws FileNotFoundException, IOException
     {
           PrintWriter writer = new PrintWriter("data/backupusers.txt", "UTF-8");
